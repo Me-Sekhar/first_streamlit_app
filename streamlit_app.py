@@ -29,4 +29,5 @@ streamlit.dataframe(my_fruit_list)
 
 # We want to filter the table data based on the fruits a customer will choose, so we'll pre-populate the list to set an example for the customer
 streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado','Strawberries'])
+streamlit.dataframe(my_fruit_list)
 
