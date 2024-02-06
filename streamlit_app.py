@@ -1,5 +1,8 @@
 import streamlit
 import pandas
+import requests
+import snowflake.connector
+from urlib.error import URLError
 
 streamlit.title('My Parents New Healthy Diner')
 
@@ -22,6 +25,7 @@ streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index))
 # Display the table on the page
 streamlit.dataframe(my_fruit_list)
 
+# import pandas
 # The picker works, but the numbers don't make any sense! We want the customer to be able to choose the fruits by name!!
 my_fruit_list = my_fruit_list.set_index('Fruit')
 streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index))
@@ -38,7 +42,7 @@ streamlit.header("Fruityvice Fruit Advice!")
 fruit_choice = streamlit.text_input('What fruit would you like information about?','Kiwi')
 streamlit.write('The user entered ', fruit_choice)
 
-import requests
+# import requests
 fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + "kiwi")
 # streamlit.text(fruityvice_response.json())
 
@@ -48,7 +52,9 @@ fruityvice_normalized = pandas.json_normalize(fruityvice_response.json())
 # Display the output on the screen as Table
 streamlit.dataframe(fruityvice_normalized)
 
-import snowflake.connector
+streamlit.stop()
+
+# import snowflake.connector
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
@@ -59,3 +65,5 @@ streamlit.dataframe(my_data_rows)
 
 add_my_fruit = streamlit.text_input('What fruit would you like add?','jackfruit')
 streamlit.write('Thanks for adding ', add_my_fruit)
+
+my_cur.execute("insert into fruit_load_list values('from streamlit')")
