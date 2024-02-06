@@ -64,7 +64,7 @@ except URLError as e:
 # Display the output on the screen as Table
 # streamlit.dataframe(fruityvice_normalized)
 
-streamlit.stop()
+# streamlit.stop()
 
 # import snowflake.connector
 
